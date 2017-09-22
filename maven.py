@@ -45,4 +45,4 @@ pr = pri + " " + (word | num).SetParseAction() + semi                 # pri MySt
 dvar = va + " " + word.SetParseAction(var1) + " " + as + (string | number) + equal + word.SetParseAction(var2) + semi
 callv = vars + word.SetParseAction(getvar)
 
-(pr).parseFile(file)
+(pr | dvar | callv).parseFile(file)
