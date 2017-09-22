@@ -1,0 +1,4 @@
+print Hello my name is Zack;
+print 00001;
+var special as string = Hello;
+print !special;
