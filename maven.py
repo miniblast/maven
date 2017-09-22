@@ -5,7 +5,7 @@ vars = {}
 varn = ""
 varv = ""
 
-file = open(sys.argv[0]).read()
+file = open(sys.argv[0] + ".mvn").read()
 
 def prin(s,l,t):
   print(t)
