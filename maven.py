@@ -45,7 +45,7 @@ def funct2(s,l,t):
     
 def getfunc(s,l,t):
   if func[t]:
-    (pr | dvar | callv | function).parseString(file)
+    (pr | dvar | callv | function).parseString(func[t])
   else:
     print("Function not found.")
 
@@ -61,6 +61,7 @@ vars1 = Word("!",max=1)
 fgroup = Word("|",max=1)
 lpar = Word("(",max=1)
 rpar = Word(")",max=1)
+func1 = Word("$")
 va = Word("var")
 string = Word("string")
 number = Word("number")
@@ -74,5 +75,6 @@ dvar = va + " " + word.SetParseAction(var1) + " " + as1 + (string | number) + eq
 callv = vars + word.SetParseAction(getvar)
 impor = imp + " " + word.SetParseAction(imp1)
 function = func + " " + word.SetParseAction(funct1) + fgroup + OneOrMore(word).SetParseAction(funct) + fgroup
+callfunc = func1 + word.SetParseAction(getfunc)
 
 (pr | dvar | callv | function | impor).parseString(file)
