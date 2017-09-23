@@ -48,6 +48,9 @@ def getfunc(s,l,t):
     (pr | dvar | callv | function).parseString(file)
   else:
     print("Function not found.")
+
+def imp(s,l,t):
+  return open(t+".mvn","r")
   
 num = ("\"" | "'") + Word(nums) + ("\"" | "'")
 word = Word(alphas)
@@ -63,11 +66,13 @@ string = Word("string")
 number = Word("number")
 as1 = Keyword("as")
 func = Keyword("func")
+imp = Keyword("imp") 
 
 # Start Parsing
 pr = pri + (str1 | str2) + (word | num).SetParseAction() + (str1 | str2)                 # pri "MyString"; pri "100";
 dvar = va + " " + word.SetParseAction(var1) + " " + as1 + (string | number) + equal + word.SetParseAction(var2) + semi
 callv = vars + word.SetParseAction(getvar)
+impor = imp + " " + word.SetParseAction(imp1)
 function = func + " " + word.SetParseAction(funct1) + fgroup + OneOrMore(word).SetParseAction(funct) + fgroup
 
-(pr | dvar | callv | function).parseString(file)
+(pr | dvar | callv | function | impor).parseString(file)
